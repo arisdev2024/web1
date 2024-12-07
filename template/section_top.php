@@ -1,3 +1,7 @@
+<?php
+include_once('../inc/config.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,16 +13,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard</title>
+    <title><?= $page->title ?></title>
 
     <!-- Custom fonts for this template-->
-    <link href="../src/sbadmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= $page->site_url() ?>src/sbadmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../src/sbadmin2/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= $page->site_url() ?>src/sbadmin2/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -31,21 +35,28 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $page->site_url() ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-check"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">MyApp</div>
+                <div class="sidebar-brand-text mx-3"><?= $page->get_app_name() ?></div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item <?= $page->is_active_menu('dashboard') ?>">
+                <a class="nav-link" href="<?= $page->site_url('admin') ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+            </li>
+            
+            <li class="nav-item <?= $page->is_active_menu('user') ?>">
+                <a class="nav-link" href="<?= $page->site_url('admin/user.php') ?>">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Data User</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -237,7 +248,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <?php
+                                    if (isset($_SESSION['full_name'])) {
+                                        echo $_SESSION['full_name'];
+                                    }
+                                    ?>
+                                </span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -271,75 +288,3 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
-
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Action</th>
-                        </tr>
-                    </table>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="../src/sbadmin2/vendor/jquery/jquery.min.js"></script>
-    <script src="../src/sbadmin2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="../src/sbadmin2/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="../src/sbadmin2/js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>
